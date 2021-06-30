@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Persistence
 {
@@ -31,6 +33,11 @@ namespace Persistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+           /* if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=1234;database=str_db");
+            }*/
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -278,30 +285,26 @@ namespace Persistence
             {
                 entity.ToTable("monitoramento", "str_db");
 
-                entity.HasIndex(e => e.Sala)
-                    .HasName("fk_Sala_Id");
+                entity.HasIndex(e => e.Equipamento)
+                    .HasName("fk_Equipamento_Id");
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
 
-                entity.Property(e => e.ArCondicionado)
-                    .HasColumnName("arCondicionado")
+                entity.Property(e => e.Equipamento)
+                    .HasColumnName("equipamento")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Estado)
+                    .HasColumnName("estado")
                     .HasColumnType("tinyint(4)");
 
-                entity.Property(e => e.Luzes)
-                    .HasColumnName("luzes")
-                    .HasColumnType("tinyint(4)");
-
-                entity.Property(e => e.Sala)
-                    .HasColumnName("sala")
-                    .HasColumnType("int(10) unsigned");
-
-                entity.HasOne(d => d.SalaNavigation)
+                entity.HasOne(d => d.EquipamentoNavigation)
                     .WithMany(p => p.Monitoramento)
-                    .HasForeignKey(d => d.Sala)
+                    .HasForeignKey(d => d.Equipamento)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_Sala_Id");
+                    .HasConstraintName("fk_Equipamento_Id");
             });
 
             modelBuilder.Entity<Operacao>(entity =>

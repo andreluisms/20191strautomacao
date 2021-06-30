@@ -68,22 +68,22 @@ namespace Service
             try
             {
                 ICodigoInfravermelhoService codigoInfravermelhoService = new CodigoInfravermelhoService(_context);
+                IMonitoramentoService monitoramentoService = new MonitoramentoService(_context);
 
                 var equip = SetEntity(entity.EquipamentoModel);
 
                 _context.Add(equip);
                 int inserted = _context.SaveChanges();
                 _context.Entry(equip).Reload();
-                int id = equip.Id;
                 var codigosEntity = new List<CodigoInfravermelhoModel>();
                 if (inserted == 1)
                 {
                     entity.Codigos.ForEach(c => codigosEntity.Add(new CodigoInfravermelhoModel { Codigo = c.Codigo, IdEquipamento = equip.Id, IdOperacao = c.IdOperacao }));
                     codigoInfravermelhoService.AddAll(codigosEntity);
+
+                    monitoramentoService.Insert(new MonitoramentoModel { Estado = false, EquipamentoId = equip.Id });;
                 }
                 return Convert.ToBoolean(inserted);
-
-
             }
             catch (Exception e)
             {

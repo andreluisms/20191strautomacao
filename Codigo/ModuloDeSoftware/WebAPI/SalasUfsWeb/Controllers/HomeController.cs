@@ -45,7 +45,7 @@ namespace SalasUfsWeb.Controllers
             return View(GetSalasUsuario());
         }
 
-        public IActionResult MonitorarSala(MonitoramentoModel monitoramento)
+        public IActionResult MonitorarSala(MonitoramentoViewModel monitoramento)
         {
             try
             {
@@ -95,14 +95,13 @@ namespace SalasUfsWeb.Controllers
             {
                 var sala = _salaService.GetById(item.SalaId);
                 var bloco = _blocoService.GetById(sala.BlocoId);
-                var monitoramento = _monitoramentoService.GetByIdSala(item.SalaId);
 
                 salas.SalasUsuario.Add(new SalaUsuarioAuxModel
                 {
                     SalaExclusiva = item,
                     Sala = sala,
                     Bloco = bloco,
-                    Monitoramento = monitoramento,
+                    Monitoramento = GetEstadoMonitoramentoSala(sala.Id),
                 });
             }
 
@@ -118,18 +117,40 @@ namespace SalasUfsWeb.Controllers
             {
                 var sala = _salaService.GetById(item.SalaId);
                 var bloco = _blocoService.GetById(sala.BlocoId);
-                var monitoramento = _monitoramentoService.GetByIdSala(item.SalaId);
 
                 salas.SalasUsuario.Add(new SalaUsuarioAuxModel
                 {
                     HorarioSala = item,
                     Sala = sala,
                     Bloco = bloco,
-                    Monitoramento = monitoramento,
+                    Monitoramento = GetEstadoMonitoramentoSala(sala.Id),
                 });
             }
 
             return salas;
+        }
+
+        public MonitoramentoViewModel GetEstadoMonitoramentoSala(int idSala) 
+        {
+            var monitoramento = new MonitoramentoViewModel();
+            foreach (var m in _monitoramentoService.GetByIdSala(idSala))
+            {
+                if (m.Estado)
+                {
+                    switch (m.EquipamentoNavigation.TipoEquipamento)
+                    {
+                        case EquipamentoModel.TIPO_CONDICIONADOR:
+                            monitoramento.ArCondicionado = m.Estado;
+                            break;
+
+                        case EquipamentoModel.TIPO_LUZES:
+                            monitoramento.Luzes = m.Estado;
+                            break;
+                    }
+                }
+            }
+
+            return monitoramento;
         }
 
     }

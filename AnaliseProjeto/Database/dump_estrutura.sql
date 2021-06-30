@@ -32,15 +32,6 @@ CREATE TABLE IF NOT EXISTS `sala` (
   KEY `fk_Sala_Bloco1_idx` (`bloco`),
   CONSTRAINT `fk_Sala_Bloco1` FOREIGN KEY (`Bloco`) REFERENCES `bloco` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
-
-CREATE TABLE IF NOT EXISTS `monitoramento` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `luzes` TINYINT(4) NOT NULL,
-  `arCondicionado` TINYINT(4) NOT NULL,
-  `sala` INT(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_Sala_Id` FOREIGN KEY (`sala`) REFERENCES `sala` (`id`)
-) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
 	
 -- Copiando estrutura para tabela str_db.tipohardware
 CREATE TABLE IF NOT EXISTS `tipohardware` (
@@ -166,6 +157,14 @@ CREATE TABLE IF NOT EXISTS `equipamento` (
   CONSTRAINT `fk_Equipamento_Sala1` FOREIGN KEY (`sala`) REFERENCES `str_db`.`sala` (`id`),
   KEY `fk_Equipamento_HardwareDeSala_idx` (`hardwareDeSala`),
   CONSTRAINT `fk_Equipamento_HardwareDeSala` FOREIGN KEY (`hardwareDeSala`) REFERENCES `str_db`.`hardwaredesala` (`id`)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `monitoramento` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `estado` TINYINT(4) NOT NULL,
+  `equipamento` INT(11)  NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_Equipamento_Id` FOREIGN KEY (`equipamento`) REFERENCES `Equipamento` (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS `operacao` (

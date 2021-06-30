@@ -79,7 +79,7 @@ function addReserva(data, indice ,dia) {
 
         '<div class="float-right">' +
         '<div class="align-element">' +
-        '<h5 class="card-text">Ar Condicionado</h5>' +
+        '<h5 class="card-text">Condicionadores</h5>' +
         '<label class="switch" onchange="submitForm(\'form-' + indice + "-" + data.monitoramento.id + "-" + data.horarioSala.id + '\',\'' + indice + "-" + data.monitoramento.id + "-" + data.horarioSala.id + '\',false)">' +
         '<input type="checkbox" name="ArCondicionado" id="arCondicionado-' + indice + "-" + data.monitoramento.id + "-" + data.horarioSala.id + '" value="' + data.monitoramento.arCondicionado + '"' + new String(data.monitoramento.arCondicionado ? "checked" : "") +'/>' +
         '<span class="slider round"></span>' +

@@ -41,23 +41,6 @@ INSERT INTO `sala` (`id`, `titulo`, `bloco`) VALUES
 	(13, 'Sala 13', 13),
 	(14, 'Sala 106', 4);
 	
-INSERT INTO `monitoramento` (`id`, `luzes`, `arCondicionado`,`sala`) VALUES
-	(1, 0,0, 1),
-	(2, 0,0, 2),
-	(3, 0,0, 3),
-	(4, 0,0, 4),
-	(5, 0,0, 5),
-	(6, 0,0, 6),
-	(7, 0,0, 7),
-	(8, 0,0, 8),
-	(9, 0,0, 9),
-	(10, 0,0, 10),
-	(11, 0,0, 11),
-	(12, 0,0, 12),
-	(13, 0,0, 13),
-	(14, 0,0, 14);
-	
-	
 -- Copiando dados para a tabela str_db.tipohardware: ~3 rows (aproximadamente)
 INSERT INTO `tipohardware` (`id`, `descricao`) VALUES
 	(1, 'MODULO ATUADOR'),
@@ -153,6 +136,10 @@ INSERT INTO `equipamento` (`id`, `modelo`,`marca`,`descricao`,`sala`,`hardwareDe
 				(2,"ELGIN","SGV330","Condicionador ELGIN 110V classe de consumo G",2,3),
 				(3,"LG","EXTENDER","Condicionador LG 110V classe de consumo G",3,3);
 
+INSERT INTO `monitoramento` (`id`, `estado`,`equipamento`) VALUES
+	(1, 0, 1),
+	(2, 0, 2),
+	(3, 0, 3);
 
 INSERT INTO `operacao` (`id`, `titulo`,`descricao`) VALUES 
 				(1,"Ligar","Liga Dispositivo"),

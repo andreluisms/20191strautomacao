@@ -21,11 +21,11 @@ namespace WebAPI.Controllers
         // GET: api/Monitoramento/5
         [HttpGet("{idSala}")]
         [Route("ObterPorSala")]
-        public ActionResult Get(int idSala)
+        public ActionResult Get(int idEquipamento)
         {
             try
             {
-                var monitoramento = _service.GetByIdSala(idSala);
+                var monitoramento = _service.GetByIdEquipamento(idEquipamento);
                 if (monitoramento == null)
                     return NoContent();
 

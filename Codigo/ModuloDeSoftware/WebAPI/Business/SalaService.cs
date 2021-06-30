@@ -33,9 +33,6 @@ namespace Service
                     if (salaInserida == null)
                         throw new ServiceException("Houve um problema ao cadastrar sala, tente novamente em alguns minutos!");
 
-                    var _monitoramentoService = new MonitoramentoService(_context);
-                    _monitoramentoService.Insert(new MonitoramentoModel { Luzes = false, ArCondicionado = false, SalaId = salaInserida.Id });
-
                     if (sala.HardwaresSala.Count > 0)
                     {
                         var _hardwareDeSalaService = new HardwareDeSalaService(_context);

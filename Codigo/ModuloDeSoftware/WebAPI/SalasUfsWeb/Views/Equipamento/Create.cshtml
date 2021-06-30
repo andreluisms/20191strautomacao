@@ -35,7 +35,7 @@
                                 <span asp-validation-for="EquipamentoModel.Descricao" class="text-danger"></span>
                             </div>
 
-                            <div class="form-group col-md-7">
+                            <div class="form-group col-md-5">
                                 <label class="control-label">Selecione a Organização</label>
                                 <select class="form-control" asp-for="OrganizacaoModel" id="select-organizacao" onchange="loadBlocosAndUsuarios()">
                                     @foreach (var item in ViewBag.Organizacoes)
@@ -136,11 +136,12 @@
                                     </div>
                                 </div>
                             </section>
-                            <div class="card-footer">
-                                <div class="col-md-4">
-                                    <input type="submit" id="btn-create-codigo" value="Salvar" class="btn btn-success" /> |
-                                    <a class="btn btn-primary" asp-action="Index">Voltar</a>
-                                </div>
+
+                        </div>
+                        <div class="card-footer">
+                            <div class="col-md-4">
+                                <input type="submit" id="btn-create-codigo" value="Salvar" class="btn btn-success" /> |
+                                <a class="btn btn-primary" asp-action="Index">Voltar</a>
                             </div>
                         </div>
                     </form>

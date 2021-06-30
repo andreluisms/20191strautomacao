@@ -13,6 +13,5 @@ namespace Model
         public int Sala { get; set; }
         public string TipoEquipamento { get; set; }
         public int? HardwareDeSala { get; set; }
-
     }
 }

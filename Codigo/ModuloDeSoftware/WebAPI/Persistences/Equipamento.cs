@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Persistence
 {
@@ -7,6 +8,7 @@ namespace Persistence
         public Equipamento()
         {
             Codigoinfravermelho = new HashSet<Codigoinfravermelho>();
+            Monitoramento = new HashSet<Monitoramento>();
         }
 
         public int Id { get; set; }
@@ -20,5 +22,6 @@ namespace Persistence
         public Hardwaredesala HardwareDeSalaNavigation { get; set; }
         public Sala SalaNavigation { get; set; }
         public ICollection<Codigoinfravermelho> Codigoinfravermelho { get; set; }
+        public ICollection<Monitoramento> Monitoramento { get; set; }
     }
 }

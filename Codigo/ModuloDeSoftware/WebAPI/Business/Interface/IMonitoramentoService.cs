@@ -1,4 +1,5 @@
 ﻿using Model;
+using Model.ViewModel;
 using System.Collections.Generic;
 
 namespace Service.Interface
@@ -7,10 +8,12 @@ namespace Service.Interface
     {
         List<MonitoramentoModel> GetAll();
         MonitoramentoModel GetById(int id);
-        MonitoramentoModel GetByIdSala(int idSala);
+        MonitoramentoModel GetByIdEquipamento(int idEquipamento);
         bool Insert(MonitoramentoModel model);
         bool Update(MonitoramentoModel model);
-        bool MonitorarSala(int idUsuario, MonitoramentoModel model);
+        List<MonitoramentoModel> GetByIdSala(int idSala);
+        bool MonitorarSala(int idUsuario, MonitoramentoViewModel monitoramento);
+        bool MonitorarEquipamento(int idUsuario, MonitoramentoModel model);
 
     }
 }

@@ -50,7 +50,7 @@ namespace SalasUfsWeb.Controllers
         {
             var equipamentosModel = _equipamentoService.GetAll();
             List<EquipamentoViewModel> equipamentos = new List<EquipamentoViewModel>();
-            equipamentosModel.ForEach(e => equipamentos.Add(new EquipamentoViewModel { EquipamentoModel = e, SalaModel = _salaService.GetById(e.Sala), HardwareDeSalaModel = _hardwareDeSalaService.GetById((int) e.HardwareDeSala) }));
+            equipamentosModel.ForEach(e => equipamentos.Add(new EquipamentoViewModel { EquipamentoModel = e, SalaModel = _salaService.GetById(e.Sala), HardwareDeSalaModel = _hardwareDeSalaService.GetById(e.HardwareDeSala.Value) }));
 
             return View(equipamentos);
         }
@@ -155,7 +155,8 @@ namespace SalasUfsWeb.Controllers
                 BlocoModel = bloco,
                 OrganizacaoModel = _organizacaoService.GetById(bloco.OrganizacaoId),
                 Codigos = codigosView,
-                HardwareDeSalaModel = _hardwareDeSalaService.GetById((int) equipamento.HardwareDeSala)
+
+                HardwareDeSalaModel = _hardwareDeSalaService.GetById(equipamento.HardwareDeSala.Value)
             };
 
             string[] tiposEquipamento = { EquipamentoModel.TIPO_CONDICIONADOR, EquipamentoModel.TIPO_LUZES };
